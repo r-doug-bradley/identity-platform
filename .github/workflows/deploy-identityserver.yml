@@ -1,11 +1,8 @@
 name: Deploy IdentityServer
 
+# Manual-only until an Azure App Service exists: set AZURE_WEBAPP_NAME and the
+# AZURE_APPSERVICE_PUBLISH_PROFILE_IDS secret, then re-add a push trigger if wanted.
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'IdentityServerAspNetIdentity/**'
-      - '.github/workflows/deploy-identityserver.yml'
   workflow_dispatch:
 
 concurrency:
