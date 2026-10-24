@@ -1,0 +1,33 @@
+@page
+@model IdentityServerAspNetIdentity.Pages.Account.ResetPassword.IndexModel
+@{
+    ViewData["Title"] = "Reset password";
+    Layout = "_AuthLayout";
+}
+
+<div class="auth-card">
+    <h1>Reset password</h1>
+    <p class="auth-subtitle">Choose a new password for your account.</p>
+
+    <partial name="_ValidationSummary" />
+
+    <form method="post">
+        <input type="hidden" asp-for="Input.UserId" />
+        <input type="hidden" asp-for="Input.Code" />
+        <input type="hidden" asp-for="Input.ReturnUrl" />
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="Input.Password"></label>
+            <input type="password" class="form-control" asp-for="Input.Password" autocomplete="new-password" autofocus />
+        </div>
+        <div class="mb-3">
+            <label class="form-label" asp-for="Input.ConfirmPassword"></label>
+            <input type="password" class="form-control" asp-for="Input.ConfirmPassword" autocomplete="new-password" />
+        </div>
+
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary" type="submit">Reset password</button>
+            <a class="btn btn-link" asp-page="/Account/Login/Index" asp-route-returnUrl="@Model.Input.ReturnUrl">Back to sign in</a>
+        </div>
+    </form>
+</div>

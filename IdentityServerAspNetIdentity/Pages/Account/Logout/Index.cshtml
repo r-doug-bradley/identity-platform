@@ -1,0 +1,19 @@
+@page
+@model IdentityServerAspNetIdentity.Pages.Logout.Index
+@{
+    ViewData["Title"] = "Sign out";
+    Layout = "_AuthLayout";
+}
+
+<div class="auth-card">
+    <h1>Sign out</h1>
+    <p class="auth-subtitle">Are you sure you want to sign out?</p>
+
+    <form asp-page="/Account/Logout/Index">
+        <input type="hidden" name="logoutId" value="@Model.LogoutId" />
+
+        <div class="d-grid">
+            <button class="btn btn-primary" type="submit">Yes, sign me out</button>
+        </div>
+    </form>
+</div>

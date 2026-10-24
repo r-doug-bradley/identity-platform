@@ -1,0 +1,81 @@
+{
+  "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Start All (Api + WebClient + IdentityServer)",
+      "configurations": [
+        "Launch Api",
+        "Launch WebClient",
+        "Launch IdentityServer"
+      ]
+    }
+  ],
+  "configurations": [
+    {
+      "name": "Launch Api",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-api",
+      "program": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "${workspaceFolder}/Api/Api.csproj",
+        "--launch-profile",
+        "https"
+      ],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "console": "integratedTerminal",
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "Now listening on: https://localhost:6001",
+        "uriFormat": "https://localhost:6001"
+      }
+    },
+    {
+      "name": "Launch WebClient",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-webclient",
+      "program": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "${workspaceFolder}/WebClient/WebClient.csproj",
+        "--launch-profile",
+        "WebClient"
+      ],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "console": "integratedTerminal",
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "Now listening on: https://localhost:5002",
+        "uriFormat": "https://localhost:5002"
+      }
+    },
+    {
+      "name": "Launch IdentityServer",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build-identityserver",
+      "program": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "${workspaceFolder}/IdentityServerAspNetIdentity/IdentityServerAspNetIdentity.csproj",
+        "--launch-profile",
+        "SelfHost"
+      ],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "console": "integratedTerminal",
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "Now listening on: https://localhost:5001",
+        "uriFormat": "https://localhost:5001"
+      }
+    }
+  ]
+}

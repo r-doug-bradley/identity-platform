@@ -1,0 +1,28 @@
+@page
+@model IdentityServerAspNetIdentity.Pages.Account.TwoFactor.RecoveryCodesModel
+
+<div class="login-page">
+    <div class="lead">
+        <h1>Recovery codes</h1>
+    </div>
+
+    @if (Model.Codes.Count == 0)
+    {
+        <div class="alert alert-warning">No recovery codes available.</div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            Store these codes in a safe place.
+        </div>
+
+        <ul class="list-group mb-3">
+        @foreach (var c in Model.Codes)
+        {
+            <li class="list-group-item"><code>@c</code></li>
+        }
+        </ul>
+    }
+
+    <a class="btn btn-primary" asp-page="./Index">Back</a>
+</div>

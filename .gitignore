@@ -1,0 +1,69 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Ll]og/
+[Ll]ogs/
+
+# Runtime diagnostics (Duende IdentityServer Serilog file sink)
+diagnostics/
+*.log
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+# Rider / ReSharper
+.idea/
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# VS Code (keep shared launch.json/tasks.json; ignore per-user)
+.vscode/*.user
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+
+# MSBuild
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Test results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.coverage
+*.coveragexml
+TestResults/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Secrets and per-environment config
+appsettings.Development.json
+appsettings.*.local.json
+
+# Claude Code local state
+.claude/
+
+# Signing keys
+*.pfx
+*.snk
+*.jwk
+IdentityServerAspNetIdentity/keys/
+
+# Local databases
+*.db
+*.db-shm
+*.db-wal

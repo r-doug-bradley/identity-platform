@@ -1,0 +1,50 @@
+name: Deploy IdentityServer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'IdentityServerAspNetIdentity/**'
+      - '.github/workflows/deploy-identityserver.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-identityserver
+  cancel-in-progress: false
+
+env:
+  AZURE_WEBAPP_NAME: <your-ids-app-name>
+  DOTNET_VERSION: '10.0.x'
+  PROJECT_PATH: IdentityServerAspNetIdentity/IdentityServerAspNetIdentity.csproj
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Block committed connection-string passwords
+        run: |
+          if grep -rEn 'Password=[^;"]+' IdentityServerAspNetIdentity/appsettings*.json 2>/dev/null; then
+            echo "::error::Password literal in appsettings. Move to App Service Configuration with a Key Vault reference."
+            exit 1
+          fi
+
+      - name: Restore
+        run: dotnet restore ${{ env.PROJECT_PATH }}
+
+      - name: Publish
+        run: dotnet publish ${{ env.PROJECT_PATH }} -c Release -o ${{ runner.temp }}/publish --no-restore
+
+      - name: Deploy to Azure App Service
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_APPSERVICE_PUBLISH_PROFILE_IDS }}
+          package: ${{ runner.temp }}/publish

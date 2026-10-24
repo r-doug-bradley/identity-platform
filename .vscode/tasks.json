@@ -1,0 +1,43 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build-api",
+      "type": "shell",
+      "command": "dotnet build \"${workspaceFolder}/Api/Api.csproj\" -c Debug",
+      "group": "build",
+      "problemMatcher": [
+        "$msCompile"
+      ]
+    },
+    {
+      "label": "build-webclient",
+      "type": "shell",
+      "command": "dotnet build \"${workspaceFolder}/WebClient/WebClient.csproj\" -c Debug",
+      "group": "build",
+      "problemMatcher": [
+        "$msCompile"
+      ]
+    },
+    {
+      "label": "build-identityserver",
+      "type": "shell",
+      "command": "dotnet build \"${workspaceFolder}/IdentityServerAspNetIdentity/IdentityServerAspNetIdentity.csproj\" -c Debug",
+      "group": "build",
+      "problemMatcher": [
+        "$msCompile"
+      ]
+    },
+    {
+      "label": "build",
+      "dependsOn": [
+        "build-api",
+        "build-webclient",
+        "build-identityserver"
+      ],
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    }
+  ]
+}

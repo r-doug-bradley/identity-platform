@@ -1,0 +1,362 @@
+/* keystone chrome theme — shared by _Layout.cshtml (account dashboard / diagnostic pages)
+   and _AuthLayout.cshtml (login / MFA / password reset flows).
+   Lives as a same-origin file so CSP style-src 'self' covers it. */
+
+:root {
+    --ks-primary: #1F6F5C;
+    --ks-primary-dark: #175546;
+    --ks-primary-light: #3FA48A;
+    --ks-ink: #1E293B;
+    --ks-ink-dark: #0F172A;
+    --ks-accent: #B8862B;
+    --ks-bg: #F6F5F2;
+    --ks-border: #E4E1DA;
+    --ks-text: #1E293B;
+    --ks-text-muted: #6B7280;
+    --ks-success: #15803D;
+    --ks-error: #B91C1C;
+    --ks-warning: #B45309;
+    --bs-primary: var(--ks-primary);
+    --bs-primary-rgb: 31, 111, 92;
+    --bs-link-color: var(--ks-primary);
+    --bs-link-hover-color: var(--ks-primary-dark);
+}
+
+html, body { height: 100%; }
+body {
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    background: var(--ks-bg);
+    color: var(--ks-text);
+    font-size: 14px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 { color: var(--ks-ink); font-weight: 600; }
+h1 { font-size: 1.6rem; margin-bottom: 0.25rem; }
+
+a { color: var(--ks-primary); text-decoration: none; }
+a:hover { color: var(--ks-primary-dark); }
+
+/* Keystone brand — composite SVG icon + HTML wordmark. */
+.keystone-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+}
+.keystone-brand__icon {
+    width: 48px; height: 48px;
+    background: var(--ks-ink);
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.keystone-brand__icon svg { width: 32px; height: 32px; display: block; }
+.keystone-brand__wordmark {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1.05;
+    font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+.keystone-brand__title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--ks-ink);
+    letter-spacing: -0.01em;
+}
+.keystone-brand__tagline {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--ks-text-muted);
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+/* ===== _Layout.cshtml chrome (account dashboard / diagnostic pages) ===== */
+
+header.keystone-header {
+    background: #fff;
+    border-bottom: 1px solid var(--ks-border);
+    padding: 0.5rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.avatar-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+.avatar-circle {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--ks-primary);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+.avatar-btn:hover .avatar-circle { background: var(--ks-primary-dark); }
+
+main.keystone-main {
+    flex: 1;
+    padding: 2rem 1.5rem;
+    overflow-y: auto;
+    min-width: 0;
+}
+.keystone-content {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+footer.keystone-footer {
+    text-align: center;
+    color: var(--ks-text-muted);
+    font-size: 12px;
+    padding: 1rem;
+    flex-shrink: 0;
+}
+
+/* ===== _AuthLayout.cshtml chrome (login / MFA / password reset) ===== */
+
+header.auth-header {
+    background: #fff;
+    border-bottom: 1px solid var(--ks-border);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+main.auth-main {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 3rem 1rem;
+    overflow-y: auto;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    background: #fff;
+    border: 1px solid var(--ks-border);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 12px rgba(30, 41, 59, 0.08);
+    padding: 2rem;
+}
+.auth-card--wide { max-width: 720px; }
+
+.auth-card h1 {
+    color: var(--ks-ink);
+    font-weight: 600;
+    font-size: 1.4rem;
+    margin: 0 0 0.25rem;
+}
+.auth-card .auth-subtitle {
+    color: var(--ks-text-muted);
+    font-size: 13px;
+    margin-bottom: 1.5rem;
+}
+
+.auth-card .form-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ks-text-muted);
+    margin-bottom: 0.35rem;
+}
+.auth-card .form-control {
+    border-color: var(--ks-border);
+    font-size: 14px;
+}
+.auth-card .form-control:focus {
+    border-color: var(--ks-primary);
+    box-shadow: 0 0 0 0.2rem rgba(31, 111, 92, 0.15);
+}
+
+.auth-divider {
+    border-top: 1px solid var(--ks-border);
+    margin: 1.5rem 0;
+    position: relative;
+    text-align: center;
+}
+.auth-divider span {
+    background: #fff;
+    color: var(--ks-text-muted);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0 0.75rem;
+    position: relative;
+    top: -0.65rem;
+}
+
+footer.auth-footer {
+    text-align: center;
+    color: var(--ks-text-muted);
+    font-size: 12px;
+    padding: 1rem;
+    flex-shrink: 0;
+}
+
+/* ===== shared utilities (buttons, forms, tables, cards) ===== */
+
+.btn-primary {
+    --bs-btn-bg: var(--ks-primary);
+    --bs-btn-border-color: var(--ks-primary);
+    --bs-btn-hover-bg: var(--ks-primary-dark);
+    --bs-btn-hover-border-color: var(--ks-primary-dark);
+    --bs-btn-active-bg: var(--ks-primary-dark);
+    --bs-btn-active-border-color: var(--ks-primary-dark);
+    --bs-btn-disabled-bg: var(--ks-primary);
+    --bs-btn-disabled-border-color: var(--ks-primary);
+}
+/* The auth pages load Bootstrap 4, which ignores the --bs-btn-* variables above. */
+.btn-primary,
+.btn-primary:disabled,
+.btn-primary.disabled {
+    color: #fff;
+    background-color: var(--ks-primary);
+    border-color: var(--ks-primary);
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled):active {
+    color: #fff;
+    background-color: var(--ks-primary-dark);
+    border-color: var(--ks-primary-dark);
+}
+.btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus {
+    box-shadow: 0 0 0 0.2rem rgba(31, 111, 92, 0.25);
+}
+input[type="checkbox"], input[type="radio"] { accent-color: var(--ks-primary); }
+.btn-link, a.btn-link {
+    color: var(--ks-primary);
+    text-decoration: none;
+}
+.btn-link:hover, a.btn-link:hover { color: var(--ks-primary-dark); }
+
+.card {
+    border: 1px solid var(--ks-border);
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    background: #fff;
+}
+
+.table {
+    background: #fff;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+.table thead th {
+    background: #fff;
+    border-bottom: 2px solid var(--ks-border);
+    color: var(--ks-text-muted);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.75rem 1rem;
+}
+.table tbody td { padding: 0.65rem 1rem; vertical-align: middle; }
+
+.form-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ks-ink);
+}
+.form-control, .form-select {
+    border-color: var(--ks-border);
+    font-size: 14px;
+}
+.form-control:focus, .form-select:focus {
+    border-color: var(--ks-primary);
+    box-shadow: 0 0 0 0.2rem rgba(31, 111, 92, 0.15);
+}
+
+.alert { font-size: 13px; }
+
+/* ===== Index.cshtml account dashboard tiles ===== */
+
+.account-hero { margin-bottom: 2rem; }
+.account-hero h1 { font-size: 1.6rem; margin: 0 0 0.25rem; }
+.account-hero .lead { color: var(--ks-text-muted); margin: 0; font-size: 14px; }
+
+.account-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+}
+.account-tile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.25rem;
+    text-decoration: none;
+    color: inherit;
+    background: #fff;
+    border: 1px solid var(--ks-border);
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    transition: border-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+}
+.account-tile:hover {
+    border-color: var(--ks-primary);
+    color: inherit;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(30, 41, 59, 0.08);
+}
+.account-tile__icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: rgba(31, 111, 92, 0.10);
+    color: var(--ks-primary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.account-tile__title {
+    font-weight: 600;
+    color: var(--ks-ink);
+    font-size: 15px;
+}
+.account-tile__desc {
+    color: var(--ks-text-muted);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.signin-card {
+    max-width: 480px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border: 1px solid var(--ks-border);
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    text-align: center;
+}
+.signin-card h1 { font-size: 1.4rem; margin: 0 0 0.5rem; }
+.signin-card p { color: var(--ks-text-muted); margin-bottom: 1.5rem; }

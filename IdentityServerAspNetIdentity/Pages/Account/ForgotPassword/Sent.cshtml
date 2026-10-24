@@ -1,0 +1,15 @@
+@page
+@model IdentityServerAspNetIdentity.Pages.Account.ForgotPassword.SentModel
+@{
+    ViewData["Title"] = "Check your email";
+    Layout = "_AuthLayout";
+}
+
+<div class="auth-card">
+    <h1>Check your email</h1>
+    <p class="auth-subtitle">If an account exists, a password reset link has been sent.</p>
+
+    <div class="d-grid">
+        <a class="btn btn-primary" asp-page="/Account/Login/Index" asp-route-returnUrl="@Model.ReturnUrl">Back to sign in</a>
+    </div>
+</div>

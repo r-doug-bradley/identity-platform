@@ -1,0 +1,33 @@
+@page
+@model IdentityServerAspNetIdentity.Pages.Logout.LoggedOut
+@{
+    ViewData["Title"] = "Signed out";
+    Layout = "_AuthLayout";
+}
+
+<div class="auth-card">
+    <h1>You're signed out</h1>
+    <p class="auth-subtitle">Thanks for using Keystone. You can close this tab or return to where you came from.</p>
+
+    @if (Model.View.PostLogoutRedirectUri != null)
+    {
+        <div class="d-grid">
+            <a class="btn btn-primary PostLogoutRedirectUri" href="@Model.View.PostLogoutRedirectUri">
+                Return to @Model.View.ClientName
+            </a>
+        </div>
+    }
+
+    @if (Model.View.SignOutIframeUrl != null)
+    {
+        <iframe width="0" height="0" class="signout" src="@Model.View.SignOutIframeUrl"></iframe>
+    }
+</div>
+
+@section Scripts
+{
+    @if (Model.View.AutomaticRedirectAfterSignOut)
+    {
+        <script src="~/js/signout-redirect.js"></script>
+    }
+}

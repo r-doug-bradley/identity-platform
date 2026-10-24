@@ -1,0 +1,91 @@
+@page
+@model IdentityServerAspNetIdentity.Pages.Account.TwoFactor.IndexModel
+
+<div class="login-page">
+    <div class="lead">
+        <h1>Two-factor authentication</h1>
+    </div>
+
+    <partial name="_ValidationSummary" />
+
+    @if (!Model.Found)
+    {
+        <div class="alert alert-warning">User not found.</div>
+    }
+    else
+    {
+        @if (!string.IsNullOrWhiteSpace(Model.StatusMessage))
+        {
+            <div class="alert alert-info">@Model.StatusMessage</div>
+        }
+
+        <div class="mb-3">
+            <div><strong>User:</strong> @Model.UserName</div>
+            <div><strong>2FA enabled:</strong> @Model.IsTwoFactorEnabled</div>
+        </div>
+
+        @if (!Model.IsTwoFactorEnabled)
+        {
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h2>Enable authenticator app</h2>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label">Key</label>
+                        <input class="form-control" readonly value="@Model.FormattedKey" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Authenticator URI</label>
+                        <input class="form-control" readonly value="@Model.AuthenticatorUri" />
+                    </div>
+
+                    <form method="post" asp-page-handler="Enable">
+                        <div class="form-group">
+                            <label asp-for="Input.Code"></label>
+                            <input class="form-control" asp-for="Input.Code" autocomplete="one-time-code" />
+                        </div>
+                        <button class="btn btn-primary" type="submit">Enable</button>
+                    </form>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h2>Recovery codes</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-page-handler="GenerateRecoveryCodes">
+                        <button class="btn btn-secondary" type="submit">Generate new recovery codes</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h2>Disable 2FA</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-page-handler="Disable">
+                        <button class="btn btn-outline-danger" type="submit">Disable</button>
+                    </form>
+                </div>
+            </div>
+        }
+
+        <div class="card mb-3">
+            <div class="card-header">
+                <h2>Reset authenticator key</h2>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-page-handler="ResetKey">
+                    <button class="btn btn-outline-warning" type="submit">Reset key</button>
+                </form>
+            </div>
+        </div>
+
+        <a class="btn btn-link" asp-page="/">Home</a>
+    }
+</div>
